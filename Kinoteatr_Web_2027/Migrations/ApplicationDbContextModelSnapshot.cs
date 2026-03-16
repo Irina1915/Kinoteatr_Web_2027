@@ -16,7 +16,7 @@ namespace Kinoteatr_Web_2027.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ContactList.Model.Category", b =>
+            modelBuilder.Entity("Kinoteatr_Web_2027.Model.Ticket", b =>
             {
                 b.Property<int>("Id")
                     .ValueGeneratedOnAdd()
@@ -24,18 +24,24 @@ namespace Kinoteatr_Web_2027.Migrations
 
                 SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                b.Property<string>("Color")
+                b.Property<string>("Title")
                     .HasColumnType("nvarchar(max)");
 
-                b.Property<string>("Name")
+                b.Property<string>("Viewer")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Date")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Summa")
                     .HasColumnType("nvarchar(max)");
 
                 b.HasKey("Id");
 
-                b.ToTable("Categoryes");
+                b.ToTable("Tickets");
             });
 
-            modelBuilder.Entity("ContactList.Model.Contact", b =>
+            modelBuilder.Entity("Kinoteatr_Web_2027.Model.Visitor", b =>
             {
                 b.Property<int>("Id")
                     .ValueGeneratedOnAdd()
@@ -43,40 +49,21 @@ namespace Kinoteatr_Web_2027.Migrations
 
                 SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                b.Property<string>("Name")
+                b.Property<int>("LastName")
+                    .HasColumnType("int");
+
+                b.Property<string>("Email")
                     .HasColumnType("nvarchar(max)");
 
                 b.Property<string>("Phone")
                     .HasColumnType("nvarchar(max)");
 
-                b.Property<string>("email")
+                b.Property<string>("BirthDate")
                     .HasColumnType("nvarchar(max)");
 
                 b.HasKey("Id");
 
-                b.ToTable("Contacts");
-            });
-
-            modelBuilder.Entity("ContactList.Model.Note", b =>
-            {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
-
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                b.Property<int>("ContactId")
-                    .HasColumnType("int");
-
-                b.Property<string>("Name")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<string>("Text")
-                    .HasColumnType("nvarchar(max)");
-
-                b.HasKey("Id");
-
-                b.ToTable("Notes");
+                b.ToTable("Visitors");
             });
 #pragma warning restore 612, 618
         }
