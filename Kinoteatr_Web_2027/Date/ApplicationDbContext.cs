@@ -11,8 +11,8 @@ namespace Kinoteatr_Web_2027.Date
             //Database.Migrate();
         }
 
-        public DbSet<Ticket> Books { get; set; }
-        public DbSet<Version> Students { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Version> Versions { get; set; }
 
     }
 }
