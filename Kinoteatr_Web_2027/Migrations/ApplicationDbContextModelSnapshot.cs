@@ -1,4 +1,4 @@
-﻿using Kinoteatr_Web_2027.Date;
+﻿using Kinoteatr_Web_2027.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
