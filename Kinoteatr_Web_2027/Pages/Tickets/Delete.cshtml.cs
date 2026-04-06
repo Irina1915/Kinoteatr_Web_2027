@@ -12,51 +12,37 @@ namespace Kinoteatr_Web_2027.Pages.Tickets
 {
     public class DeleteModel : PageModel
     {
-        private readonly Kinoteatr_Web_2027.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DeleteModel(Kinoteatr_Web_2027.Data.ApplicationDbContext context)
+        public DeleteModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Ticket Ticket { get; set; } = default!;
+        public Ticket Ticket { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(string Title)
         {
-            if (id == null)
-            {
+            Ticket = _context.Tickets.Find(Title);
+
+            if (Ticket == null)
                 return NotFound();
-            }
 
-            var ticket = await _context.Tickets.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (ticket is not null)
-            {
-                Ticket = ticket;
-
-                return Page();
-            }
-
-            return NotFound();
+            return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPost()
         {
-            if (id == null)
+            var participant = _context.Tickets.Find(Ticket.Title);
+
+            if (participant != null)
             {
-                return NotFound();
+                _context.Tickets.Remove(participant);
+                //_context.SaveChanges();
             }
 
-            var ticket = await _context.Tickets.FindAsync(id);
-            if (ticket != null)
-            {
-                Ticket = ticket;
-                _context.Tickets.Remove(Ticket);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
+            return RedirectToPage("Index");
         }
     }
 }
