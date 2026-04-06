@@ -1,0 +1,34 @@
+﻿@page
+@model Kinoteatr_Web_2027.Pages.Tickets.CreateModel
+
+        @{
+        ViewData["Title"] = "Create";
+        }
+        
+        <h1>Create</h1>
+
+<h1>Добавить покупателя</h1>
+<form method="post">
+    <div>
+        <label>Заглавие</label><br />
+        <input asp-for="Ticket.Title" />
+        <span asp-validation-for="Ticket.Title"></span>
+    </div>
+    <div>
+        <label>Смотритель</label><br />
+        <input asp-for="Ticket.Viewer" />
+    </div>
+    <div>
+        <label>Дата</label><br />
+        <input asp-for="Ticket.Date" type="Date" />
+    </div>
+    <div class="Сумма">
+        <input asp-for="Ticket.Summa" />
+        <span asp-validation-for="Ticket.Summa"></span>
+    </div>
+</form>
+<a asp-asp-page="Index">Назад</a>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
