@@ -24,10 +24,7 @@ namespace Kinoteatr_Web_2027.Pages.Tickets
 
         public IActionResult OnGet(int id)
         {
-            Ticket = _context.Tickets
-                        .Where(c => c.Id == id)
-                        .Include(b => b.Viewer)
-                        .FirstOrDefault();
+            Ticket = _context.Tickets.FirstOrDefault(s  => s.Id == id);
 
             if (Ticket == null)
                 return NotFound();

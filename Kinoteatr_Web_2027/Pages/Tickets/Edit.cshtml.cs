@@ -15,13 +15,11 @@ namespace Kinoteatr_Web_2027.Pages.Tickets
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        //private readonly IHubContext<BookHub> _hubContext;
 
-        //public EditModel(ApplicationDbContext context, IHubContext<BookHub> hubContext)
-        //{
-        //    _context = context;
-        //    _hubContext = hubContext;
-        //}
+       public EditModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         [BindProperty]
         public Ticket? Ticket { get; set; }
@@ -30,7 +28,6 @@ namespace Kinoteatr_Web_2027.Pages.Tickets
         {
             Ticket = _context.Tickets
                         .Where(c => c.Id == id)
-                        .Include(b => b.Viewer)
                         .FirstOrDefault();
 
             if (Ticket == null)
