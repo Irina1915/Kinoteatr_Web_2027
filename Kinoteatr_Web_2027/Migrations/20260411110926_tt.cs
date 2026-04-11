@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
 
 namespace Kinoteatr_Web_2027.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class tt : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,10 +17,11 @@ namespace Kinoteatr_Web_2027.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Viewer = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Summa = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Viewer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<int>(type: "int", nullable: false),
+                    Summa = table.Column<double>(type: "float", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -30,11 +34,11 @@ namespace Kinoteatr_Web_2027.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LastName = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BirthDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
-
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
