@@ -1,54 +1,33 @@
 ﻿@page
 @model Kinoteatr_Web_2027.Pages.Visitors.CreateModel
 
-        @{
-        ViewData["Title"] = "Create";
-        }
-        
-        <h1>Create</h1>
-        
-    <h4>Visitor</h4>
-    <hr />
-    <div class="row">
-    <div class="col-md-4">
-    <form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Visitor.LastName" class="control-label"></label>
-                <input asp-for="Visitor.LastName" class="form-control" />
-                <span asp-validation-for="Visitor.LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Visitor.Email" class="control-label"></label>
-                <input asp-for="Visitor.Email" class="form-control" />
-                <span asp-validation-for="Visitor.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Visitor.Phone" class="control-label"></label>
-                <input asp-for="Visitor.Phone" class="form-control" />
-                <span asp-validation-for="Visitor.Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Visitor.BirthDate" class="control-label"></label>
-                <input asp-for="Visitor.BirthDate" class="form-control" />
-                <span asp-validation-for="Visitor.BirthDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Visitor.Name" class="control-label"></label>
-                <input asp-for="Visitor.Name" class="form-control" />
-                <span asp-validation-for="Visitor.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{
+    ViewData["Title"] = "Добавить Зрителя";
 }
+
+<h1>Добавить покупателя</h1>
+<form method="post">
+    <div>
+        <label>ФИО</label><br />
+        <input asp-for="Visitor.LastName" />
+        <span asp-validation-for="Visitor.LastName"></span>
+    </div>
+    <div>
+        <label>Email</label><br />
+        <input asp-for="Visitor.Email" />
+    </div>
+    <div>
+        <label>Телефон</label><br />
+        <input asp-for="Visitor.Phone" type="Phone" />
+    </div>
+    <div class="Дата рождения">
+        <input asp-for="Visitor.BirthDate" />
+        <span asp-validation-for="Visitor.BirthDate"></span>
+    </div>
+</form>
+<a asp-asp-page="Index">Назад</a>
+
+@section Scripts 
+    {
+    <partial name="_ValidationScriptsPartial" />
+    }

@@ -12,33 +12,27 @@ namespace Kinoteatr_Web_2027.Pages.Visitors
 {
     public class CreateModel : PageModel
     {
-        private readonly Kinoteatr_Web_2027.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public CreateModel(Kinoteatr_Web_2027.Data.ApplicationDbContext context)
+        public CreateModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
-
         [BindProperty]
-        public Visitor Visitor { get; set; } = default!;
+        public Visitor Visitor { get; set; }
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public void OnGet() { }
+
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
             _context.Visitors.Add(Visitor);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("Index");
         }
     }
 }

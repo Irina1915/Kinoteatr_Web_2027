@@ -13,65 +13,35 @@ namespace Kinoteatr_Web_2027.Pages.Tickets
 {
     public class EditModel : PageModel
     {
-        private readonly Kinoteatr_Web_2027.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public EditModel(Kinoteatr_Web_2027.Data.ApplicationDbContext context)
+        public EditModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Ticket Ticket { get; set; } = default!;
+        public Ticket Ticket { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            Ticket = _context.Tickets.Find(id);
 
-            var ticket =  await _context.Tickets.FirstOrDefaultAsync(m => m.Id == id);
-            if (ticket == null)
-            {
+            if (Ticket == null)
                 return NotFound();
-            }
-            Ticket = ticket;
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
-            _context.Attach(Ticket).State = EntityState.Modified;
+            _context.Tickets.Update(Ticket);
+            //_context.SaveChanges();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TicketExists(Ticket.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
-        }
-
-        private bool TicketExists(int id)
-        {
-            return _context.Tickets.Any(e => e.Id == id);
+            return RedirectToPage("Index");
         }
     }
 }

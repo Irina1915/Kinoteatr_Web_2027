@@ -12,18 +12,18 @@ namespace Kinoteatr_Web_2027.Pages.Tickets
 {
     public class IndexModel : PageModel
     {
-        private readonly Kinoteatr_Web_2027.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public IndexModel(Kinoteatr_Web_2027.Data.ApplicationDbContext context)
+        public IndexModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IList<Ticket> Ticket { get;set; } = default!;
+        public List<Ticket> Tickets { get; set; }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            Ticket = await _context.Tickets.ToListAsync();
+            Tickets = _context.Tickets.ToList();
         }
     }
 }

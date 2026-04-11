@@ -12,32 +12,23 @@ namespace Kinoteatr_Web_2027.Pages.Tickets
 {
     public class DetailsModel : PageModel
     {
-        private readonly Kinoteatr_Web_2027.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DetailsModel(Kinoteatr_Web_2027.Data.ApplicationDbContext context)
+        public DetailsModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public Ticket Ticket { get; set; } = default!;
+        public Ticket Ticket { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
+            Ticket = _context.Tickets.FirstOrDefault(p => p.Id == id);
+
+            if (Ticket == null)
                 return NotFound();
-            }
 
-            var ticket = await _context.Tickets.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (ticket is not null)
-            {
-                Ticket = ticket;
-
-                return Page();
-            }
-
-            return NotFound();
+            return Page();
         }
     }
 }

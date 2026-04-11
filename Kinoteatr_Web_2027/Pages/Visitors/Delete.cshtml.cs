@@ -12,51 +12,38 @@ namespace Kinoteatr_Web_2027.Pages.Visitors
 {
     public class DeleteModel : PageModel
     {
-        private readonly Kinoteatr_Web_2027.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DeleteModel(Kinoteatr_Web_2027.Data.ApplicationDbContext context)
+        public DeleteModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Visitor Visitor { get; set; } = default!;
+        public Visitor Visitor { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(string LastName)
         {
-            if (id == null)
-            {
+            Visitor = _context.Visitors.Find(LastName);
+
+            if (Visitor == null)
                 return NotFound();
-            }
 
-            var visitor = await _context.Visitors.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (visitor is not null)
-            {
-                Visitor = visitor;
-
-                return Page();
-            }
-
-            return NotFound();
+            return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPost()
         {
-            if (id == null)
+            var participant = _context.Visitors.Find(Visitor.LastName);
+
+            if (participant != null)
             {
-                return NotFound();
+                _context.Visitors.Remove(participant);
+                //_context.SaveChanges();
             }
 
-            var visitor = await _context.Visitors.FindAsync(id);
-            if (visitor != null)
-            {
-                Visitor = visitor;
-                _context.Visitors.Remove(Visitor);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
+            return RedirectToPage("Index");
+        
         }
     }
 }
