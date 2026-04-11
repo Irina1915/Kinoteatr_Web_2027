@@ -2,54 +2,31 @@
 @model Kinoteatr_Web_2027.Pages.Tickets.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редактирование данных о билете";
 }
 
-<h1>Edit</h1>
+<h1>Редактировать данные</h1>
 
-<h4>Ticket</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Ticket.Title" class="control-label"></label>
-                <input asp-for="Ticket.Title" class="form-control" />
-                <span asp-validation-for="Ticket.Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ticket.Viewer" class="control-label"></label>
-                <input asp-for="Ticket.Viewer" class="form-control" />
-                <span asp-validation-for="Ticket.Viewer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ticket.Date" class="control-label"></label>
-                <input asp-for="Ticket.Date" class="form-control" />
-                <span asp-validation-for="Ticket.Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ticket.Summa" class="control-label"></label>
-                <input asp-for="Ticket.Summa" class="form-control" />
-                <span asp-validation-for="Ticket.Summa" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Ticket.Id" />
-            <div class="form-group">
-                <label asp-for="Ticket.Name" class="control-label"></label>
-                <input asp-for="Ticket.Name" class="form-control" />
-                <span asp-validation-for="Ticket.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<form method="post">
+    <input type="hidden" asp-for="Ticket.Title" />
+    <div>
+        <label>Зритель</label><br />
+        <input asp-for="Ticket.Viewer" />
     </div>
-</div>
+    <div>
+        <label>Дата</label><br />
+        <input asp-for="Ticket.Date" type="email" />
+    </div>
+    <div>
+        <label>Цена билета</label><br />
+        <input asp-for="Ticket.Summa" type="date" />
+    </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+    <button type="submit">Сохранить</button>
+</form>
+
+<a asp-page="Index">Назад</a>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }

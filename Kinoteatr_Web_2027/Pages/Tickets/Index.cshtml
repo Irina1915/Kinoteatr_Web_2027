@@ -2,59 +2,39 @@
 @model Kinoteatr_Web_2027.Pages.Tickets.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Список билетов</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Добавить новый билет</a>
 </p>
-<table class="table">
+
+<table border="1" cellpadding="4">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Ticket[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ticket[0].Viewer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ticket[0].Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ticket[0].Summa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ticket[0].Name)
-            </th>
+            <th>Наименование</th>
+            <th>Зритель</th>
+            <th>Дата</th>
+            <th>Цена билета</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Ticket) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Viewer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Summa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var buyer in Model.Ticket)
+        {
+            <tr>
+                <td>@buyer.Title</td>
+                <td>@buyer.Viewer</td>
+                <td>@buyer.Date</td>
+                <td>@buyer.Summa</td>
+                <td>
+                    <a asp-page="Details" asp-route-id="@buyer.Title">Открыть</a>
+                    <a asp-page="Edit" asp-route-id="@buyer.Title">Изменить</a>
+                    <a asp-page="Delete" asp-route-id="@buyer.Title">Удалить</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
