@@ -22,9 +22,9 @@ namespace Kinoteatr_Web_2027.Pages.Visitors
         [BindProperty]
         public Visitor Visitor { get; set; }
 
-        public IActionResult OnGet(string LastName)
+        public IActionResult OnGet(int id)
         {
-            Visitor = _context.Visitors.Find(LastName);
+            Visitor = _context.Visitors.Find(id);
 
             if (Visitor == null)
                 return NotFound();
@@ -34,16 +34,15 @@ namespace Kinoteatr_Web_2027.Pages.Visitors
 
         public IActionResult OnPost()
         {
-            var participant = _context.Visitors.Find(Visitor.LastName);
+            var visitor = _context.Visitors.Find(Visitor.Id);
 
-            if (participant != null)
+            if (visitor != null)
             {
-                _context.Visitors.Remove(participant);
-                //_context.SaveChanges();
+                _context.Visitors.Remove(visitor);
+                _context.SaveChanges();
             }
 
             return RedirectToPage("Index");
-        
         }
     }
 }

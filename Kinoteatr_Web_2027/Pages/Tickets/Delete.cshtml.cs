@@ -20,11 +20,14 @@ namespace Kinoteatr_Web_2027.Pages.Tickets
         }
 
         [BindProperty]
-        public Ticket Ticket { get; set; }
+        public Ticket? Ticket { get; set; }
 
-        public IActionResult OnGet(string Title)
+        public IActionResult OnGet(int id)
         {
-            Ticket = _context.Tickets.Find(Title);
+            Ticket = _context.Tickets
+                        .Where(c => c.Id == id)
+                        .Include(b => b.Viewer)
+                        .FirstOrDefault();
 
             if (Ticket == null)
                 return NotFound();
@@ -34,12 +37,12 @@ namespace Kinoteatr_Web_2027.Pages.Tickets
 
         public IActionResult OnPost()
         {
-            var participant = _context.Tickets.Find(Ticket.Title);
+            var ticket = _context.Tickets.Find(Ticket.Id);
 
-            if (participant != null)
+            if (ticket != null)
             {
-                _context.Tickets.Remove(participant);
-                //_context.SaveChanges();
+                _context.Tickets.Remove(ticket);
+                _context.SaveChanges();
             }
 
             return RedirectToPage("Index");

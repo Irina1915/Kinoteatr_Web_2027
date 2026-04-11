@@ -23,7 +23,7 @@ namespace Kinoteatr_Web_2027.Pages.Visitors
 
         public IActionResult OnGet(int id)
         {
-            Visitor = _context.Visitors.FirstOrDefault(p => p.Id == id);
+            Visitor = _context.Visitors.FirstOrDefault(s => s.Id == id);
 
             if (Visitor == null)
                 return NotFound();

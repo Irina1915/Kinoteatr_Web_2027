@@ -19,11 +19,14 @@ namespace Kinoteatr_Web_2027.Pages.Tickets
             _context = context;
         }
 
-        public Ticket Ticket { get; set; }
+        public Ticket? Ticket { get; set; }
 
         public IActionResult OnGet(int id)
         {
-            Ticket = _context.Tickets.FirstOrDefault(p => p.Id == id);
+            Ticket = _context.Tickets
+                        .Where(c => c.Id == id)
+                        .Include(b => b.Viewer)
+                        .FirstOrDefault();
 
             if (Ticket == null)
                 return NotFound();

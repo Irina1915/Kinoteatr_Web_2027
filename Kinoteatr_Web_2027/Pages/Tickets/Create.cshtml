@@ -5,29 +5,64 @@
         ViewData["Title"] = "Create";
         }
         
-        <h1>Create</h1>
+<div class="container mt-4">
 
-<h1>Добавить билет</h1>
-<form method="post">
-    <div>
-        <label>Заглавие</label><br />
-        <input asp-for="Ticket.Title" />
-        <span asp-validation-for="Ticket.Title"></span>
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Добавить книгу</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <form method="post">
+
+                        <div class="mb-3">
+                            <label asp-for="Ticket.Title" class="form-label">Название</label>
+                            <input asp-for="Ticket.Title" class="form-control" />
+                            <span asp-validation-for="Ticket.Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Ticket.Viewer" class="form-label">Зритель</label>
+                            <input asp-for="Ticket.Viewer" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Ticket.Date" class="form-label">Дата</label>
+                            <input asp-for="Ticket.Date" type="number" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Ticket.Summa" class="form-label">Цена</label>
+                            <input asp-for="Ticket.Summa" type="number" class="form-control" />
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+
+                            <a asp-page="Index" class="btn btn-secondary">
+                                Назад
+                            </a>
+
+                            <button type="submit" class="btn btn-success">
+                                Сохранить
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
     </div>
-    <div>
-        <label>Зритель</label><br />
-        <input asp-for="Ticket.Viewer" />
-    </div>
-    <div>
-        <label>Дата</label><br />
-        <input asp-for="Ticket.Date" type="Date" />
-    </div>
-    <div class="Сумма">
-        <input asp-for="Ticket.Summa" />
-        <span asp-validation-for="Ticket.Summa"></span>
-    </div>
-</form>
-<a asp-asp-page="Index">Назад</a>
+
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

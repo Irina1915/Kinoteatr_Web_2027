@@ -5,20 +5,64 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Удалить билет</h1>
+<div class="container mt-4">
 
-<h3>Вы уверены?</h3>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
 
-<div>
-    <p><strong>@Model.Ticket.Title</strong></p>
-    <p>Зритель: @Model.Ticket.Viewer</p>
-    <p>Дата: @Model.Ticket.Date</p>
-    <p>Сумма: @Model.Ticket.Summa</p>
+            <div class="card border-danger shadow-sm">
+
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Удалить билет</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="alert alert-warning">
+                        Вы уверены, что хотите удалить этот билет?
+                    </div>
+
+                    <div class="mb-3">
+
+                        <h5 class="card-title">@Model.Ticket.Title</h5>
+
+                        <p class="card-text text-muted">
+                            Зритель: @Model.Ticket.Viewer
+                        </p>
+
+                        <p class="card-text">
+                            Дата: <span class="badge bg-secondary">@Model.Ticket.Date</span>
+                        </p>
+
+                        <p class="card-text">
+                            Цена: <span class="badge bg-info">@Model.Ticket.Summa</span>
+                        </p>
+
+                    </div>
+
+                    <form method="post">
+
+                        <input type="hidden" asp-for="Ticket.Id" />
+
+                        <div class="d-flex justify-content-between">
+
+                            <a asp-page="Index" class="btn btn-secondary">
+                                Отмена
+                            </a>
+
+                            <button type="submit" class="btn btn-danger">
+                                Удалить
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
 </div>
-
-<form method="post">
-    <input type="hidden" asp-for="Ticket.Title" />
-    <button type="submit">Удалить</button>
-</form>
-
-<a asp-page="Index">Отмена</a>

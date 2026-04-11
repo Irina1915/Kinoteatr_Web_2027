@@ -39,7 +39,7 @@ namespace Kinoteatr_Web_2027.Pages.Visitors
                 return Page();
 
             _context.Visitors.Update(Visitor);
-            //_context.SaveChanges();
+            _context.SaveChanges();
 
             return RedirectToPage("Index");
         }

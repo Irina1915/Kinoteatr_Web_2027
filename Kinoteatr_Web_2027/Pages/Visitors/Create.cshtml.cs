@@ -13,7 +13,6 @@ namespace Kinoteatr_Web_2027.Pages.Visitors
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-
         public CreateModel(ApplicationDbContext context)
         {
             _context = context;
@@ -21,9 +20,7 @@ namespace Kinoteatr_Web_2027.Pages.Visitors
 
         [BindProperty]
         public Visitor Visitor { get; set; }
-
         public void OnGet() { }
-
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)

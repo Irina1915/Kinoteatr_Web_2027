@@ -5,29 +5,52 @@
     ViewData["Title"] = "Добавить Зрителя";
 }
 
-<h1>Добавить покупателя</h1>
-<form method="post">
-    <div>
-        <label>ФИО</label><br />
-        <input asp-for="Visitor.LastName" />
-        <span asp-validation-for="Visitor.LastName"></span>
-    </div>
-    <div>
-        <label>Email</label><br />
-        <input asp-for="Visitor.Email" />
-    </div>
-    <div>
-        <label>Телефон</label><br />
-        <input asp-for="Visitor.Phone" type="Phone" />
-    </div>
-    <div class="Дата рождения">
-        <input asp-for="Visitor.BirthDate" />
-        <span asp-validation-for="Visitor.BirthDate"></span>
-    </div>
-</form>
-<a asp-asp-page="Index">Назад</a>
+<h1 class="mb-4">Добавить Зрителя</h1>
 
-@section Scripts 
-    {
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="Visitor.LastName" class="form-label"></label>
+                        <input asp-for="Visitor.LastName" class="form-control" />
+                        <span asp-validation-for="Visitor.LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Visitor.Email" class="form-label"></label>
+                        <input asp-for="Visitor.Email" class="form-control" />
+                        <span asp-validation-for="Visitor.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Visitor.Phone" class="form-label"></label>
+                        <input asp-for="Visitor.Phone" class="form-control" />
+                        <span asp-validation-for="Visitor.Phone" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Visitor.BirthDate" class="form-label"></label>
+                        <input asp-for="Visitor.BirthDate" type="date" class="form-control" />
+                        <span asp-validation-for="Visitor.BirthDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            Сохранить
+                        </button>
+
+                        <a asp-page="Index" class="btn btn-secondary">
+                            Назад
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    }
+}
