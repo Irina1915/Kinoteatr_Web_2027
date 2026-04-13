@@ -25,7 +25,6 @@ namespace Kinoteatr_Web_2027.Pages.Tickets
         {
             Ticket = _context.Tickets
                         .Where(c => c.Id == id)
-                        .Include(b => b.Viewer)
                         .FirstOrDefault();
 
             if (Ticket == null)
