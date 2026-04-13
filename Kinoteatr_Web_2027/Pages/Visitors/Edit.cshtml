@@ -1,0 +1,65 @@
+﻿@page
+@model Kinoteatr_Web_2027.Pages.Visitors.EditModel
+
+@{
+    ViewData["Title"] = "Редактирование зрителей";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+        <div class="card shadow-sm mt-4">
+            <div class="card-header bg-warning">
+                <h5 class="mb-0">Редактирование студента</h5>
+            </div>
+
+            <div class="card-body">
+
+                <form method="post">
+                    <input type="hidden" asp-for="Visitor.Id" />
+
+                    <div class="mb-3">
+                        <label asp-for="Visitor.LastName" class="form-label"></label>
+                        <input asp-for="Visitor.LastName" class="form-control" />
+                        <span asp-validation-for="Visitor.LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Visitor.Email" class="form-label"></label>
+                        <input asp-for="Visitor.Email" class="form-control" />
+                        <span asp-validation-for="Visitor.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Visitor.Phone" class="form-label"></label>
+                        <input asp-for="Visitor.Phone" class="form-control" />
+                        <span asp-validation-for="Visitor.Phone" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Visitor.BirthDate" class="form-label"></label>
+                        <input asp-for="Visitor.BirthDate" type="date" class="form-control" />
+                        <span asp-validation-for="Visitor.BirthDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-page="Index" class="btn btn-outline-secondary">
+                            Назад
+                        </a>
+
+                        <button type="submit" class="btn btn-success">
+                            Сохранить
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

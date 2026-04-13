@@ -1,0 +1,109 @@
+﻿@page
+@model Kinoteatr_Web_2027.Pages.Tickets.IndexModel
+
+@{
+}
+
+<div class="container mt-4">
+
+    <!-- Заголовок и кнопка добавления билета -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Список книг</h2>
+        <a asp-page="Create" class="btn btn-success">
+            Добавить новый билет
+        </a>
+    </div>
+
+    <!-- Плитки билет -->
+    <div class="row g-4">
+        @foreach (var ticket in Model.Tickets)
+        {
+            <!-- Каждая карточка билета в колонке -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+
+                        <!-- Заголовок билета -->
+                        <h5 class="card-title text-truncate">
+                            📚 @ticket.Title
+                        </h5>
+
+                        <!-- Зритель -->
+                        <p class="card-text text-muted mb-1">
+                            Зритель: @ticket.Viewer
+                        </p>
+
+                        <!-- Дата покупки -->
+                        <p class="card-text mb-1">
+                            Дата: <span class="badge bg-secondary">@ticket.Date</span>
+                        </p>
+
+                        <!-- Цена билета -->
+                        <p class="card-text mb-2">
+                            Цена: <span class="badge bg-info">@ticket.Summa</span>
+                        </p>
+
+                        <!-- Кнопки действий -->
+                        <div class="d-flex justify-content-between">
+                            <a asp-page="Details" asp-route-id="@ticket.Id" class="btn btn-sm btn-info">
+                                Открыть
+                            </a>
+                            <a asp-page="Edit" asp-route-id="@ticket.Id" class="btn btn-sm btn-warning">
+                                Изменить
+                            </a>
+                            <a asp-page="Delete" asp-route-id="@ticket.Id" class="btn btn-sm btn-danger">
+                                Удалить
+                            </a>
+                        </div>
+
+                    </div>
+        }
+    </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+<!-- Подключение SignalR для обновления билетов в реальном времени -->
+<script>
+    // Создаём подключение к хабу TicketHub
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/TicketHub") // Путь к хабу на сервере
+        .build();
+
+    // Слушаем событие "TicketUpdated", отправляемое сервером
+    connection.on("TicketUpdated", function (book) {
+        // Ищем существующую карточку по id
+        const existingCard = document.getElementById("ticket-" + ticket.id);
+
+        // HTML для новой/обновлённой карточки
+        const html = `
+            <div class="card h-100 shadow-sm" id="ticket-${ticket.id}">
+                <div class="card-body">
+                    <h5 class="card-title text-truncate">📚 ${ticket.title}</h5>
+
+                    <p class="card-text mb-1">Год: <span class="badge bg-secondary">${ticket.year}</span></p>
+                    <p class="card-text mb-2">Кол-во: <span class="badge bg-info">${ticket.copies}</span></p>
+                    <div class="d-flex justify-content-between">
+                        <a href="/Tickets/Details?id=${ticket.id}" class="btn btn-sm btn-info">Открыть</a>
+                        <a href="/Tickets/Edit?id=${ticket.id}" class="btn btn-sm btn-warning">Изменить</a>
+                        <a href="/Tickets/Delete?id=${ticket.id}" class="btn btn-sm btn-danger">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        if (existingCard) {
+            // Если карточка уже есть — заменяем старую на новую
+            existingCard.outerHTML = html;
+        } else {
+            // Если карточка новая — создаём div.col и добавляем в контейнер
+            const container = document.querySelector(".row");
+            const wrapper = document.createElement("div");
+            wrapper.className = "col-sm-6 col-md-4 col-lg-3";
+            wrapper.innerHTML = html;
+            container.appendChild(wrapper);
+        }
+    });
+
+    // Запуск подключения
+    connection.start().catch(err => console.error(err.toString()));
+</script>
+
