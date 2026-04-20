@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Kinoteatr_Web_2027.Migrations
 {
     /// <inheritdoc />
-    public partial class rr : Migration
+    public partial class rrr : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace Kinoteatr_Web_2027.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Viewer = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Summa = table.Column<double>(type: "float", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
