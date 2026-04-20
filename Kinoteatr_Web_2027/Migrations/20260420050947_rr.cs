@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Kinoteatr_Web_2027.Migrations
 {
     /// <inheritdoc />
-    public partial class tt : Migration
+    public partial class rr : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
