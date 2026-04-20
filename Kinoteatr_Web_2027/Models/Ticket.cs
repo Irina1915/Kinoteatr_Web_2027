@@ -1,8 +1,11 @@
-﻿namespace Kinoteatr_Web_2027.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Kinoteatr_Web_2027.Models
 {
     public class Ticket : EFModel
     {
-        public string Title { get; set; }
+        public string Title { get; set; } = "";
+        [Required(ErrorMessage = "Требуется название фильма.")]
         public string Viewer { get; set; }
         public DateTime Date { get; set; }
 
