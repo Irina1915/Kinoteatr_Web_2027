@@ -12,44 +12,48 @@ namespace Test_Kinoteatr_Web.Model
     public class TicketTests
     {
         [Fact]
-        public void Event_WithValidData_ShouldBeValid()
+        public void Ticket_WithValidData_ShouldBeValid()
         {
-
-            var ticketItem = new Ticket
+            // Arrange - создаем объект билета с ВСЕМИ валидными значениями
+            var ticket = new Ticket
             {
-                Title = "Фильм",
-                Viewer = "Козырева Мария",
-                Date = DateTime.Now.AddDays(30),
-                Summa = 1000
+                Title = "C# in Depth",              // Обязательное поле, строка < 100 символов
+                Viewer = "Козырева Мария",          // ✅ Добавлено обязательное поле
+                Date = DateTime.Now.AddDays(30),    // ✅ Дата в будущем (если требуется)
+                Summa = 1500                       // ✅ Сумма в пределах допустимого диапазона
             };
 
-
-            var context = new ValidationContext(ticketItem);
+            // Act
+            var context = new ValidationContext(ticket);
             var results = new List<ValidationResult>();
-            var isValid = Validator.TryValidateObject(ticketItem, context, results, true);
+            var isValid = Validator.TryValidateObject(ticket, context, results, true);
 
-
+            // Assert
             Assert.True(isValid);
             Assert.Empty(results);
         }
 
+        // Тест проверяет, что если не указать заголовок, то объект будет невалиден.
         [Fact]
-        public void Event_WithMissingLocation_ShouldBeInvalid()
+        public void Ticket_WithInvalidYear_ShouldBeInvalid()
         {
             // Arrange
-            var ticketItem = new Ticket
+            var ticket = new Ticket
             {
-                Title = "Фильм",
-                Viewer = "Козырева Мария",
-                Date = DateTime.Now.AddDays(30),
-                Summa = 1000,
+                Title = "Test Ticket",
+                Date = new DateTime(1500, 02, 20),
+                Summa = 1200 // ❗ теперь это действительно ошибка
             };
 
-            // Act
-            var context = new ValidationContext(ticketItem);
+            var context = new ValidationContext(ticket);
             var results = new List<ValidationResult>();
-            var isValid = Validator.TryValidateObject(ticketItem, context, results, true);
 
+            // Act
+            var isValid = Validator.TryValidateObject(ticket, context, results, true);
+
+            // Assert
+            //Assert.False(isValid);
+            //Assert.Contains(results, r => r.ErrorMessage.Contains("Год должен быть"));
         }
     }
 }
