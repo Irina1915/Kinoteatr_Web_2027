@@ -40,7 +40,7 @@ namespace Test_Kinoteatr_Web.Model
             // Arrange
             var ticket = new Ticket
             {
-                Title = "Test Ticket",
+                Title = null,
                 Date = new DateTime(1500, 02, 20),
                 Summa = 1200 // ❗ теперь это действительно ошибка
             };
