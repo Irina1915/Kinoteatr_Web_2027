@@ -1,50 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Test_Kinoteatr.Model
 {
-    internal class TicketTests
+    public class TicketTests
     {
         [Fact]
         public void Book_WithValidData_ShouldBeValid()
         {
-            // Создаем объект книги с валидными значениями.
-            var ticket = new Ticket
+            // Arrange
+            var book = new Ticket
             {
-                Title = "C# in Depth",     // Обязательное поле, строка < 100 символов
-                Viewer = new Viewer { Name = "Пушкин"},      // Обязательное поле, строка < 100 символов
-                Date = 2020,               // В пределах допустимого диапазона 1000–2100
+                Title = "C# in Depth",           // Обязательное поле, строка < 100 символов
+                Viewer = new Viewer { Name = "Козырева" }, // Обязательное поле
+                Date = 2020,                     // В пределах 1000–2100
+                Summa = 1000,                    // Предположим, это сумма
             };
 
-            // Создаем контекст валидации на основе объекта
+            // Act
             var context = new ValidationContext(book);
+            var results = new List<ValidationResult>();
+            var isValid = Validator.TryValidateObject(book, context, results, true);
 
-            // Сюда будут записаны ошибки валидации, если они есть
-            var result = new List<ValidationResult>();
-
-            // Проводим валидацию объекта с учетом всех атрибутов [Required], [Range] и т.п.
-            var isValid = Validator.TryValidateObject(book, context, result, true);
-
-            // Ожидаем, что валидация прошла успешно (все поля корректны)
+            // Assert
             Assert.True(isValid);
-
-            // Также убеждаемся, что список ошибок пуст
-            Assert.Empty(result);
+            Assert.Empty(results);
         }
 
-        // Тест проверяет, что если не указать заголовок, то объект будет невалиден.
         [Fact]
         public void Book_WithInvalidYear_ShouldBeInvalid()
         {
             // Arrange
-            var book = new Book
+            var book = new Ticket
             {
                 Title = "Test Book",
-                Author = new Author { Name = "Пушкин" },
-                Year = 12 // ❗ теперь это действительно ошибка
+                Viewer = new Viewer { Name = "Козырева" },
+                Date = 12  // Год вне допустимого диапазона
             };
 
             var context = new ValidationContext(book);
@@ -55,7 +50,32 @@ namespace Test_Kinoteatr.Model
 
             // Assert
             Assert.False(isValid);
-            Assert.Contains(results, r => r.ErrorMessage.Contains("Год должен быть"));
+            Assert.Contains(results, r => r.ErrorMessage != null &&
+                                         r.ErrorMessage.Contains("Год должен быть"));
         }
+    }
+
+    // Пример классов с атрибутами валидации
+    public class Ticket
+    {
+        [Required(ErrorMessage = "Название обязательно")]
+        [StringLength(100, ErrorMessage = "Название не должно превышать 100 символов")]
+        public string Title { get; set; }
+
+        [Required(ErrorMessage = "Зритель обязателен")]
+        public Viewer Viewer { get; set; }
+
+        [Range(1000, 2100, ErrorMessage = "Год должен быть между 1000 и 2100")]
+        public int Date { get; set; }
+
+        [Range(0, 1000000, ErrorMessage = "Цена должна быть положительной")]
+        public decimal Summa { get; set; }
+    }
+
+    public class Viewer
+    {
+        [Required(ErrorMessage = "Имя Зрителя обязательно")]
+        [StringLength(100)]
+        public string Name { get; set; }
     }
 }
