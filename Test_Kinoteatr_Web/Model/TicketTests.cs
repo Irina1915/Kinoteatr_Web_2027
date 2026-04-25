@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Kinoteatr_Web_2027.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test_Kinoteatr.Model
+namespace Test_Kinoteatr_Web.Model
 {
     public class TicketTests
     {
@@ -79,3 +81,4 @@ namespace Test_Kinoteatr.Model
         public string Name { get; set; }
     }
 }
+

@@ -15,12 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <ProjectReference Include="..\Kinoteatr_Web_2027\Kinoteatr_Web_2027.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\" />
-    <Folder Include="Hubs\" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>

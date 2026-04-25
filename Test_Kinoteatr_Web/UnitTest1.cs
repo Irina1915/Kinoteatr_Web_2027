@@ -1,4 +1,4 @@
-﻿namespace Test_Kinoteatr
+﻿namespace Test_Kinoteatr_Web
 {
     public class UnitTest1
     {
