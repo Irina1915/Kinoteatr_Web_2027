@@ -1,18 +1,13 @@
-﻿using Kinoteatr_Web_2027.Data;
-using Kinoteatr_Web_2027.Models;
+using Kinoteatr_Web_2027.Data;
+using Kinoteatr_Web_2027.Models.AuthApp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Kinoteatr_Web_2027.Pages.Visitors
+namespace Kinoteatr_Web_2027.Pages.Account.Users
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -23,25 +18,26 @@ namespace Kinoteatr_Web_2027.Pages.Visitors
         }
 
         [BindProperty]
-        public Visitor Visitor { get; set; }
+        public AuthUser User { get; set; }
 
-        public IActionResult OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Visitor = _context.Visitors.Find(id);
+            User = await _context.AuthUsers.FindAsync(id);
 
-            if (Visitor == null)
+            if (User == null)
                 return NotFound();
 
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            _context.Visitors.Update(Visitor);
-            _context.SaveChanges();
+            _context.Attach(User).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("Index");
         }

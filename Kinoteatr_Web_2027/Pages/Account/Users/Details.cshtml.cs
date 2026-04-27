@@ -1,15 +1,10 @@
-﻿using Kinoteatr_Web_2027.Data;
-using Kinoteatr_Web_2027.Models;
+using Kinoteatr_Web_2027.Data;
+using Kinoteatr_Web_2027.Models.AuthApp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Kinoteatr_Web_2027.Pages.Visitors
+namespace Kinoteatr_Web_2027.Pages.Account.Users
 {
     [Authorize]
     public class DetailsModel : PageModel
@@ -21,16 +16,17 @@ namespace Kinoteatr_Web_2027.Pages.Visitors
             _context = context;
         }
 
-        public Visitor Visitor { get; set; }
+        public AuthUser User { get; set; }
 
-        public IActionResult OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Visitor = _context.Visitors.FirstOrDefault(s => s.Id == id);
+            User = await _context.AuthUsers.FindAsync(id);
 
-            if (Visitor == null)
+            if (User == null)
                 return NotFound();
 
             return Page();
         }
+
     }
 }
