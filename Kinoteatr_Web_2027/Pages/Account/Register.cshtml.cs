@@ -41,7 +41,7 @@ namespace Kinoteatr_Web_2027.Pages.Account
                 return RedirectToPage("/Index");
             }
 
-            ModelState.AddModelError(string.Empty, "Пользователь уже есть!");
+            ModelState.AddModelError(string.Empty, "Пользователь уже ест!");
             return Page();
         }
 
