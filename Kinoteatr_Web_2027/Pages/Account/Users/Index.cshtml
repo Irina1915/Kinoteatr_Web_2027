@@ -6,9 +6,9 @@
 <div class="container mt-4">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Users</h2>
+        <h2>Пользователи</h2>
         <a asp-page="Create" class="btn btn-primary">
-            Create User
+            Добавить пользователя
         </a>
     </div>
 
@@ -23,13 +23,12 @@
                     <div class="card-body">
 
                         <h5 class="card-title text-truncate">
-                            @user.Email
+                            Почта: @user.Email
                         </h5>
 
                         <p class="card-text">
-                            Role:
                             <span class="badge bg-secondary">
-                                @user.Role
+                                Роль: @user.Role
                             </span>
                         </p>
 
@@ -42,19 +41,19 @@
                             <a asp-page="Details"
                                asp-route-id="@user.Id"
                                class="btn btn-sm btn-info">
-                                Details
+                                Открыть
                             </a>
 
                             <a asp-page="Edit"
                                asp-route-id="@user.Id"
                                class="btn btn-sm btn-warning">
-                                Edit
+                                Изменить
                             </a>
 
                             <a asp-page="Delete"
                                asp-route-id="@user.Id"
                                class="btn btn-sm btn-danger">
-                                Delete
+                                Удалить
                             </a>
 
                         </div>

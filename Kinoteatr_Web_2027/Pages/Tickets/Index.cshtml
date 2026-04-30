@@ -14,6 +14,7 @@
         </a>
     </div>
 
+   
     <!-- Плитки билет -->
     <div class="row g-4">
         @foreach (var ticket in Model.Tickets)
@@ -21,7 +22,7 @@
             <!-- Каждая карточка билета в колонке -->
             <div class="col-sm-6 col-md-4 col-lg-3">
 
-                <div class="card shadow-sm mt-6">
+                <div class="card h-100 shadow-sm">
                         <!-- Заголовок билета -->
                         <h5 class="card-title text-truncate">
                             @ticket.Title
@@ -59,7 +60,7 @@
             </div>
             }
     </div>
-
+    
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>

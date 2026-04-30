@@ -5,14 +5,14 @@
 
 <div class="container mt-4">
 
-    <h2>User Details</h2>
+    <h2>Информация о пользователи</h2>
 
     <div class="card">
 
         <div class="card-body">
 
-            <p><b>Email:</b> @Model.User.Email</p>
-            <p><b>Role:</b> @Model.User.Role</p>
+            <p>Почта<b>Email:</b> @Model.User.Email</p>
+            <p>Роль<b>Role:</b> @Model.User.Role</p>
 
         </div>
 
@@ -22,11 +22,11 @@
 
     <a asp-page="Edit" asp-route-id="@Model.User.Id"
        class="btn btn-warning">
-        Edit
+        Редактировать
     </a>
 
     <a asp-page="Index" class="btn btn-secondary">
-        Back
+        Назад
     </a>
 
 </div>
