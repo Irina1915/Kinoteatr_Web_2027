@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kinoteatr_Web_2027.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260427061650_rr")]
+    [Migration("20260430054020_rr")]
     partial class rr
     {
         /// <inheritdoc />
