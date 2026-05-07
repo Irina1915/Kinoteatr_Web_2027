@@ -23,12 +23,13 @@
                     <div class="card-body">
 
                         <h5 class="card-title text-truncate">
-                            Почта: @user.Email
+                            @user.Email
                         </h5>
 
                         <p class="card-text">
+                            Role:
                             <span class="badge bg-secondary">
-                                Роль: @user.Role
+                                @user.Role
                             </span>
                         </p>
 
@@ -41,18 +42,21 @@
                             <a asp-page="Details"
                                asp-route-id="@user.Id"
                                class="btn btn-sm btn-info">
+
                                 Открыть
                             </a>
 
                             <a asp-page="Edit"
                                asp-route-id="@user.Id"
                                class="btn btn-sm btn-warning">
+
                                 Изменить
                             </a>
 
                             <a asp-page="Delete"
                                asp-route-id="@user.Id"
                                class="btn btn-sm btn-danger">
+
                                 Удалить
                             </a>
 

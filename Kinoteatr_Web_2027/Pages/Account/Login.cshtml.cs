@@ -54,6 +54,5 @@ namespace Kinoteatr_Web_2027.Pages.Account
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
         }
-
     }
 }

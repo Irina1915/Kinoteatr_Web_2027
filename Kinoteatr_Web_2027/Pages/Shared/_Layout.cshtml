@@ -1,4 +1,4 @@
-﻿﻿@using System.Security.Claims
+﻿﻿﻿@using System.Security.Claims
 @*++ авторизация*@
 @inject IHttpContextAccessor HttpContextAccessor
 @{
@@ -8,8 +8,8 @@
     var isAdmin = user?.IsInRole("Admin") ?? false;
     var userId = user?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 }
-@*-- авторизация*@
-﻿
+@*-- авторизация*@﻿
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,6 +42,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-page="/Visitors/Index">Зрители</a>
                         </li>
+
                         @if (isAdmin)
                         {
                             <li>
@@ -74,13 +75,17 @@
                             </li>
                         }
 
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <button class="btn btn-outline-secondary" onclick="toggleTheme()">🌓 Переключить тему</button>
-                            </li>
-                        </ul>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        @*+++ темная тема*@
+                        <li class="nav-item">
+                            <button class="btn btn-outline-secondary" onclick="toggleTheme()">🌓 Переключить тему</button>
+                        </li>
+                        @*--- темная тема*@
+
+                    </ul>
                 </div>
-            </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            </div>
         </nav>
     </header>
     <div class="container">
@@ -88,6 +93,7 @@
             @RenderBody()
         </main>
     </div>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -102,6 +108,7 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 
+</html>
 
 <script>
     const html = document.documentElement;
@@ -119,4 +126,3 @@
         html.setAttribute("data-bs-theme", currentTheme === "dark" ? "light" : "dark");
     }
 </script>
-</html>
