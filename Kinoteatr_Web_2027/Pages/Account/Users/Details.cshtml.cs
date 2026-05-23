@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Kinoteatr_Web_2027.Pages.Account.Users
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class DetailsModel : PageModel
     {
         private readonly ApplicationDbContext _context;

@@ -10,6 +10,9 @@
     <div class="alert alert-danger">
         Вы уверены, что хотите удалить этого пользователя?
     </div>
+
+    <ul class="list-group mb-3">
+        <li class="list-group-item">
     @if (Model.User.Avatar != null)
     {
         <div class="mb-3">
@@ -17,8 +20,8 @@
                  src="data:image/png;base64,@Convert.ToBase64String(Model.User.Avatar)" />
         </div>
     }
+    </li>
 
-    <ul class="list-group mb-3">
         <li class="list-group-item">
             <b>Почта:</b> @Model.User.Email
         </li>
