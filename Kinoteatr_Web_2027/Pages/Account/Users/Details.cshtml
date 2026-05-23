@@ -11,6 +11,13 @@
 
         <div class="card-body">
 
+            @if (Model.User.Avatar != null)
+            {
+                <div class="mb-3">
+                    <img style="max-width:150px;"
+                         src="data:image/png;base64,@Convert.ToBase64String(Model.User.Avatar)" />
+                </div>
+            }
             <p>Почта<b>Email:</b> @Model.User.Email</p>
             <p>Роль<b>Role:</b> @Model.User.Role</p>
 

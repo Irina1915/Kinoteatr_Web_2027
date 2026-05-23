@@ -5,5 +5,7 @@
         public string Email { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
+        public new string Name { get; set; } = "Name";
+        public byte[]? Avatar { get; set; }
     }
 }

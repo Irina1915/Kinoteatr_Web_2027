@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kinoteatr_Web_2027.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260430054020_rr")]
+    [Migration("20260523065303_rr")]
     partial class rr
     {
         /// <inheritdoc />
@@ -33,11 +33,15 @@ namespace Kinoteatr_Web_2027.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<byte[]>("Avatar")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")

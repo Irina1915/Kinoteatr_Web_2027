@@ -10,6 +10,13 @@
     <div class="alert alert-danger">
         Вы уверены, что хотите удалить этого пользователя?
     </div>
+    @if (Model.User.Avatar != null)
+    {
+        <div class="mb-3">
+            <img style="max-width:150px;"
+                 src="data:image/png;base64,@Convert.ToBase64String(Model.User.Avatar)" />
+        </div>
+    }
 
     <ul class="list-group mb-3">
         <li class="list-group-item">
