@@ -1,15 +1,11 @@
-﻿using Kinoteatr_Web_2027.Data;
-using Kinoteatr_Web_2027.Models;
+using Kinoteatr_Web_2027.Data;
+using Kinoteatr_Web_2027.Models.AuthApp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Kinoteatr_Web_2027.Pages.Visitors
+namespace Kinoteatr_Web_2027.Pages.Account.Users
 {
     [Authorize]
     public class IndexModel : PageModel
@@ -21,11 +17,11 @@ namespace Kinoteatr_Web_2027.Pages.Visitors
             _context = context;
         }
 
-        public List<Visitor> Visitors { get; set; }
+        public IList<AuthUser> Users { get; set; }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Visitors = _context.Visitors.ToList();
+            Users = await _context.AuthUsers.ToListAsync();
         }
     }
 }
